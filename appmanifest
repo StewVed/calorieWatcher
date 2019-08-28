@@ -1,0 +1,22 @@
+{
+  "name": "Calorie Watcher",
+  "short_name": "CalorieWatcher",
+  "description": "A personal and private browser-based daily food & calorie manager by StewVed",
+  "start_url": ".",
+  "lang": "en",
+  "orientation": "portrait",
+  "display": "fullscreen",
+  "theme_color": "white",
+  "background_color": "white",
+  "icons": [{
+    "src": "favicon.svg"
+  }, {
+    "src": "favicon.png",
+    "sizes": "64x64",
+    "type": "image/png"
+  }, {
+    "src": "favicon256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }]
+}
