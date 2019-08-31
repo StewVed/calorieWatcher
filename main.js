@@ -45,7 +45,7 @@ function initContent() {
       + ' style="width:7em;font-size:1em;">New&nbsp;Day</button>'
       + '<div id="foodPane">'
         + '<input id="fdsrch" type="search" class="foodButton editEnable" style="margin:0;width:100%;" placeholder="add food (search)">'
-        + '<div id="foodList"></div>'
+        + '<div id="foodsToday"></div>'
       + '</div>'
       + '<div id="todayPaneFoods"></div>'
     + '</div></div>'
@@ -161,7 +161,7 @@ function foodSearch() {
   }
 
   //add the list to the pane.
-  document.getElementById('foodList').innerHTML = listOfFoods;
+  document.getElementById('foodsToday').innerHTML = listOfFoods;
 }
 
 function findFoodIndex(num) {
