@@ -405,7 +405,7 @@ function todayAdd(a,b) {
   newElement.id = 'tl' + x; //add the index number here so we know what do add later.
   newElement.className = 'foodButton uButtonGreen';
   //add it to the foodpane:
-  document.getElementById('foodPane').parentNode.insertBefore(newElement, document.getElementById('foodPane').nextSibling);
+  document.getElementById('todayPaneFoods').parentNode.insertBefore(newElement, document.getElementById('foodPane').nextSibling);
   //add stuff to the new entry
   newElement.innerHTML =
     todayList[x][1] + ': '
@@ -611,7 +611,7 @@ function mClick(targ) {
 
   if (targ.id.slice(0, 2) === 'fl' || targ.id.slice(0, 2) === 'fi') {
     foodListClick(targ);
-  } else if (zParentID[0] == 'todayPaneInner' || targ.id.slice(0, 2) === 'tl') {
+  } else if (zParentID[0] == 'todayPaneInner' || zParentID[0] == 'todayPaneFoods' || targ.id.slice(0, 2) === 'tl') {
     todayListClick(targ);
   } else if (zParentClass === 'dialog') {
     dialogueMouseUp(targ);
