@@ -13,8 +13,7 @@ Calorie Tracker
 calorie storer
 
 */
-var zAppVersion = '2019-08-28'  /* date of last modification. Change sw.js as well! */
-  , zAppPrefix = 'cw'           /* Because localStorage uses the base domain not the exact page! */
+var zAppPrefix = 'cw'           /* Because localStorage uses the base domain not the exact page! */
   , d1 = '^*'                   /* hopefully obscure enough that it'll never happen in a string! */
   , d2 = '#*'                   /* as above. These are delimiters for seperating data. */
   , savedToday = 0
@@ -34,7 +33,7 @@ function initContent() {
       + '<input type="text" id="maintCals" class="inputTing editEnable"'
       + ' size="3" value="' + maintCalories + '">'
       + ' = <span id="maintCalsLeft">0000</span> cals left.'
-      + '<br>Target Calories'
+      + '<br>Target Calories:'
       + '<input type="text" id="targCals" class="inputTing editEnable"'
       + ' size="3" value="' + targetCalories + '">'
       + ' = <span id="targCalsLeft">0000</span> cals left.'
@@ -49,10 +48,9 @@ function initContent() {
       + '</div>'
       + '<div id="todayPaneFoods"></div>'
     + '</div></div>'
-
   ;
 }
-//editEnable
+
 function runApp() {
   savedToday = (storageLoad('Today') || 0);
   savedTotal = (storageLoad('TotalCals') || 0);
@@ -76,10 +74,6 @@ function  loadFoodList() {
   });
 
   firstScript.parentNode.insertBefore(zNewElement, firstScript);
-}
-
-function reloadDrFreeman() {
-  location.reload(true);//true should make it properly refrech as is required.
 }
 
 function dialogueMake(zId, message, zFocus) {
