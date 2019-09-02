@@ -250,10 +250,10 @@ var foodList = [
 , [258, 'Mccain Micro Chips', 158, 1, ' Pack Microwaved']
 , [259, 'Tesco Scottish Porridge', 363, 100, 'g']
 , [260, 'Ryvita Crackerbread ', 19, 1, ' 5g slice of Crackerbread']
+, [260, 'Tesco Fruit & Nut Granola', 430, 100, 'g (50g suggested)']
+, [261, 'Yeo Valley Strawberry Yogurt ', 115, 1, ' 120g pot (95/100g)']
+, [262, 'Miles Heavenly Hot Chocolate', 387, 100, 'g powder']
 /*
-, [260, '', 100, 100, 'g']
-, [261, '', 100, 100, 'g']
-, [262, '', 100, 100, 'g']
 , [263, '', 100, 100, 'g']
 , [264, '', 100, 100, 'g']
 , [265, '', 100, 100, 'g']

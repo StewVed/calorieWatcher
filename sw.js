@@ -1,4 +1,4 @@
-var zAppVersion = 'cw2019-09-02';
+var zAppVersion = 'cw2019-09-02a';
 
 self.addEventListener('install', function(event) {
   event.waitUntil(caches.open(zAppVersion).then(function(cache) {
@@ -17,10 +17,8 @@ self.addEventListener('install', function(event) {
     ])
   }))
   console.log('calorieWatcher files cached.');
-  // if this is an update, just update without user having to close/open.
+  // activate without user having to close/open the webapp.
   self.skipWaiting();
-  // if a lot has changed, consider reloading the page:
-  // reloadDrFreeman() in the app.
 });
 self.addEventListener('fetch', function(event) {
   event.respondWith(
@@ -36,7 +34,7 @@ self.addEventListener('fetch', function(event) {
   );
 });
 self.addEventListener('activate', function(event) {
-  //let the new serviceworker take over now:
+  //make the new serviceworker take over now:
   event.waitUntil(clients.claim());
   //delete any old file caches for this app:
   var zAppPrefix = zAppVersion.slice(0, 2);
