@@ -27,10 +27,10 @@ var foodList = [
 , [35, 'Strawberry Jam', 247, 100, 'g']
 , [36, 'Smarties Ice Cream', 118, 1, ' cone']
 , [37, 'Tesco Californian Seedless Raisins', 293, 100, 'g']
-, [38, 'Tesco Rocket Lolli', 39, 1, ' lolly']
+, [38, 'Tesco Rocket Lolly', 39, 1, ' lolly']
 , [39, 'Pickled Onions', 48, 100, 'g']
 , [40, 'Penne Pasta', 360, 100, 'g']
-, [41, 'Onion', 41, 100, 'g']
+, [41, 'Birds Eye Peas (Garden or Petit Pois)', 68, 100, 'g']
 , [42, 'Nutella', 546, 100, 'g']
 , [43, 'Peanut Butter', 672, 100, 'g']
 , [44, 'Tesco Mini Milk', 42, 1, ' lolly']
@@ -233,19 +233,19 @@ var foodList = [
 , [241, 'Tesco Real Fruit Splits', 68, 1, ' lolly']
 , [242, 'Rowntrees Fruit Pastilles Lollies', 54, 1, ' lolly']
 , [243, 'Nestle Fab Strawberry Ice Lollies', 82, 1, ' lolly']
-, [244, 'Tesco Rocket Lollies', 39, 1, ' lolly']
+, [244, 'Pepper (red/yellow/green)', 31, 100, 'g']
 , [245, 'Twister Mini Ice Cream Lolly', 42, 1, ' lolly']
 , [246, 'Cadbury Flake Ice Cream', 205, 100, 'g']
 , [247, 'Nesquik Chocolate Powder', 151, 1, ' (200ml) serving ']
 , [248, 'Aero Instant Hot Chocolate Drink', 98, 1, ' 200ml serving']
 , [249, 'Jack Daniel\'s Tennessee Whiskey', 54, 25, 'ml']
 , [250, 'Cheerios', 380, 100, 'g']
-, [251, 'Semi Skimmed Milk (Tesco British)', 50, 100, 'g']
+, [251, 'Milk - Semi Skimmed (Tesco British)', 50, 100, 'g']
 , [252, 'Choc Milk (nesquik + semi-skimmed milk)', 151, 1, ' 200ml Glass']
 , [253, 'Satsuma, Clementine, Mandarin', 42, 1, ' fruit']
 , [254, 'Clover Light', 454, 100, 'g']
 , [255, 'Fruit Splash (Tesco)', 11, 1, ' 250ml bottle']
-, [256, 'Wheetos (chocolate)', 116, 100, 'g']
+, [256, 'Wheetos (chocolate)', 388, 100, 'g']
 , [257, 'Tesco Hash Browns', 69, 1, ' hash brown']
 , [258, 'Mccain Micro Chips', 158, 1, ' Pack Microwaved']
 , [259, 'Tesco Scottish Porridge', 363, 100, 'g']
@@ -264,6 +264,3 @@ var foodList = [
 */
 ]
 ;
-
-
-
