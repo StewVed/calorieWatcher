@@ -198,9 +198,9 @@ function foodListClick(targ) {
   var message =
     '<p style="margin:4px;font-size:2em;">Add food to today&apos;s list</p>'
     + '<H2>' + tmpArry[1] + ':</h2>'
-    + '<input type="number" id="addAmount" class="inputThingy editEnable" style="float:none;width:5em;" value="0">' + tmpArry[4]
+    + '<input type="number" id="addAmount" class="inputThingy editEnable" style="float:none;width:5em;" value="">' + tmpArry[4]
     + '<br>OR<br>'
-    + '<input type="number" id="addcals" class="inputThingy editEnable" style="float:none;width:5em;" value="0">  Calories &nbsp; &nbsp;'
+    + '<input type="number" id="addcals" class="inputThingy editEnable" style="float:none;width:5em;" value="">  Calories &nbsp;'
     + '</p>'
     + '<button id="y" class="foodButton diaButton uButtonGreen" type="button" style="clear:both;float:left;width:5em;">add</button>'
     + '<button id="b" class="foodButton diaButton uButtonRed" type="button" style="float:right;width:5em;">Cancel</button>'
@@ -215,12 +215,12 @@ function foodListClick(targ) {
 function savedFoodDialog() {
   var message =
     '<p style="margin:4px;font-size:2em;">Add new food to list</p>'
-   // + '<p>'
-    + '<input type="text" id="afName" class="inputThingy editEnable" placeholder="Name of Food"><br>'
-    + '<input type="number" id="afCals" class="inputThingy editEnable" placeholder="Amount of calories"><br>'
-    + '<input type="number" id="afPer" class="inputThingy editEnable" placeholder="per (eg 100 for 100g)"><br>'
-    + '<input type="text" id="afType" class="inputThingy editEnable" placeholder="per type (eg g, ml)"><br>'
-    //+ '</p>'
+
+    + '<input type="text" id="afName" class="inputThingy editEnable" placeholder="Name of Food">'
+    + '<br><br>'
+    + '<input type="number" id="afCals" class="inputThingy editEnable" placeholder="calories" style="width:23%;margin-right:2%;">'
+    + '<input type="text" id="afPer" class="inputThingy editEnable" placeholder=" per (eg 100g, 100ml, 1 slice)" style="width:75%;clear:none;padding-left:0;text-align:left;">'
+
     + '<button id="c" class="foodButton diaButton uButtonGreen" type="button" style="width:5em;clear:both;float:left;">Add</button>'
     + '<button id="b" class="foodButton diaButton uButtonRed" type="button" style="width:5em;float:right;">Cancel</button>'
   ;
@@ -228,27 +228,48 @@ function savedFoodDialog() {
 }
 
 function savedFoodAdd() {
-  var a=(1000000 + savedFoodList.length).toFixed()
-    , b=document.getElementById('afName').value
-    , c=document.getElementById('afCals').value
-    , d=document.getElementById('afPer').value
-    , e=document.getElementById('afType').value
+  var a = (1000000 + savedFoodList.length).toFixed()
+    , b = document.getElementById('afName').value
+    , c = document.getElementById('afCals').value
+    , perSplit = document.getElementById('afPer').value
+    , d
+    , e
   ;
+  //split up the per into amount and description
+  d = parseFloat(perSplit).toString(); //should just nab the number at the start of the string
+  e = perSplit.slice(perSplit.indexOf(d)+d.length, perSplit.length); //take the number off the front.
 
-  if (a && b && c && d && e)
-  //later, maybe add checking for this
-  savedFoodList.push([
-      a /*alphabet-based index*/
-    , b /*name of food (eg "Tesco Sweet Popcorn")*/
-    , c /*amount of calories (eg 490)*/
-    , d /*per amount (eg per 100)*/
-    , e /*per description (eg g)*/
-  ]);
+  // if user puts "slice" for per without saying "1 slice".
+  if (!isFinite(d)) {
+    d = 1;
+  }
 
-  savedFoodsSave();
-  document.getElementById('fdsrch').value = b;
-  foodSearch();
-  searchBlur();
+  if (a && b && c && d && e) {
+    //later, maybe add checking for this
+    savedFoodList.push([
+        a /*alphabet-based index*/
+      , b /*name of food (eg "Tesco Sweet Popcorn")*/
+      , c /*amount of calories (eg 490)*/
+      , d /*per amount (eg per 100)*/
+      , e /*per description (eg g)*/
+    ]);
+
+    savedFoodsSave();
+    document.getElementById('fdsrch').value = b;
+    foodSearch();
+    searchBlur();
+  }
+  else {
+    if (!b) {
+      document.getElementById('afName').style.backgroundColor = 'hsla(0, 100%, 50%, .33)';
+    }
+    if (!c) {
+      document.getElementById('afCals').style.backgroundColor = 'hsla(0, 100%, 50%, .33)';
+    }
+    if (!d || !e) {
+      document.getElementById('afPer').style.backgroundColor = 'hsla(0, 100%, 50%, .33)';
+    }
+  }
 }
 
 function savedFoodsLoad() {
@@ -369,7 +390,7 @@ function todayPopulate() {
 
   document.getElementById('maintCals').addEventListener('blur', saveCals);
   document.getElementById('targCals').addEventListener('blur', saveCals);
-  document.getElementById('fdsrch').addEventListener('focus', searchFocus, false);
+  document.getElementById('fdsrch').addEventListener('click', searchFocus, false);
   document.getElementById('fdsrch').addEventListener('blur', searchBlur, false);
   todayRecalculate();
   searchBlur();
