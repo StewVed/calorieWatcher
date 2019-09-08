@@ -13,7 +13,6 @@ function keyUpGameEvents(theKey) {
 function mouseClickEvents() {
   mClick(mouseVars.current.target);
 }
-
 function mouseDownEvents() {
   //custom mouse/touch down events for your app go here
 }

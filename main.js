@@ -419,8 +419,10 @@ function todayAdd(a,b) {
   var newElement = document.createElement('div');
   newElement.id = 'tl' + x; //add the index number here so we know what do add later.
   newElement.className = 'foodButton uButtonGreen';
-  //add it to the foodpane:
-  document.getElementById('todayPaneFoods').parentNode.insertBefore(newElement, document.getElementById('foodPane').nextSibling);
+  //add it to the top of the foodpane: (don't have to worry about null cos tis never empty)
+  document.getElementById('todayPaneFoods').insertBefore(
+    newElement, document.getElementById('todayPaneFoods').firstChild
+  );
   //add stuff to the new entry
   newElement.innerHTML =
     todayList[x][1] + ': '
@@ -428,7 +430,9 @@ function todayAdd(a,b) {
     + ' cals'
   ;
   if (document.getElementById('localDataNotice')) {
-    document.getElementById('localDataNotice').parentNode.removeChild(document.getElementById('localDataNotice'));
+    document.getElementById('localDataNotice').parentNode.removeChild(
+      document.getElementById('localDataNotice')
+    );
   }
   todayRecalculate();
   todaySave();
@@ -441,7 +445,9 @@ function todayRemove(a) {
   //delete the thing!
   delete todayList[a];
   //delete the food from the foodPane
-  document.getElementById('tl' + a).parentNode.removeChild(document.getElementById('tl' + a));
+  document.getElementById('tl' + a).parentNode.removeChild(
+    document.getElementById('tl' + a)
+  );
   //recalculate and save the updated list
   todayRecalculate();
   todaySave();
