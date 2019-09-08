@@ -16,10 +16,10 @@ calorie storer
 var zAppPrefix = 'cw'           /* Because localStorage uses the base domain not the exact page! */
   , d1 = '^*'                   /* hopefully obscure enough that it'll never happen in a string! */
   , d2 = '#*'                   /* as above. These are delimiters for seperating data. */
-  , savedToday = 0
-  , savedTotal = 0
-  , maintCalories = 1800
-  , targetCalories = 1600
+  , savedToday
+  , savedTotal
+  , maintCalories
+  , targetCalories
   , todayList = []
   , savedFoodList = []
 ;
@@ -31,12 +31,12 @@ function initContent() {
     + '<span style="color:rgb(0, 0, 205);font-style:italic;">Watcher</span></h1>'
     + '<div id="CalorieStuff">Maint Calories: '
       + '<input type="number" id="maintCals" class="inputTing editEnable"'
-      + ' style="width: 4em;" value="' + maintCalories + '">'
-      + ' = <span id="maintCalsLeft">0000</span> cals left.'
+      + ' style="width: 4em;">'
+      + ' = <span id="maintCalsLeft"></span> cals left.'
       + '<br>Target Calories:'
       + '<input type="number" id="targCals" class="inputTing editEnable"'
-      + ' style="width: 4em;" value="' + targetCalories + '">'
-      + ' = <span id="targCalsLeft">0000</span> cals left.'
+      + ' style="width: 4em;">'
+      + ' = <span id="targCalsLeft"></span> cals left.'
     + '</div>'
     + '<div id="todayPane"><div id="todayPaneInner">'
       + '<h1 style="margin:0.3em 0em 0em 0em;">Today&apos;s food list</h1>'
@@ -54,7 +54,7 @@ function initContent() {
 function runApp() {
   savedToday = (storageLoad('Today') || 0);
   savedTotal = (storageLoad('TotalCals') || 0);
-  maintCalories = (storageLoad('TodayCals') || 1800);
+  maintCalories = (storageLoad('MaintCals') || 1800);
   targetCalories  = (storageLoad('TargCals') || 1600);
   document.getElementById('maintCals').value = maintCalories;
   document.getElementById('targCals').value = targetCalories;
@@ -473,10 +473,10 @@ function todayRecalculate() {
   }
 
   document.getElementById('maintCalsLeft').innerHTML =
-    parseInt(document.getElementById('maintCals').value) - a.toFixed();
+    maintCalories - a.toFixed();
 
   document.getElementById('targCalsLeft').innerHTML =
-    parseInt(document.getElementById('targCals').value) - a.toFixed();
+    targetCalories - a.toFixed();
 
   //rather inefficient place for it, but put letScroll adder here:
   upSetClass(document.getElementById('todayPane'));
@@ -552,7 +552,7 @@ function todayListClick(targ) {
 }
 
 function saveCals() {
-  storageSave('TodayCals', parseInt(document.getElementById('maintCals').value));
+  storageSave('MaintCals', parseInt(document.getElementById('maintCals').value));
   storageSave('TargCals', parseInt(document.getElementById('targCals').value));
   todayRecalculate();
 }
