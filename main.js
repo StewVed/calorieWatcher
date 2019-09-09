@@ -42,9 +42,9 @@ function initContent() {
       + '<h1 style="margin:0.3em 0em 0em 0em;">Today&apos;s food list</h1>'
       + '<button id="t+" class="foodButton diaButton uButtonOrange" type="button"'
       + ' style="width:7em;font-size:1em;">New&nbsp;Day</button>'
-      + '<div id="foodPane">'
+      + '<div id="searchPane" style="position:relative;">'
         + '<input id="fdsrch" type="search" class="foodButton editEnable" style="margin:0;width:100%;" placeholder="add food (search)">'
-        + '<div id="foodsToday"></div>'
+        + '<div id="searchFoods"></div>'
       + '</div>'
       + '<div id="todayPaneFoods"></div>'
     + '</div></div>'
@@ -103,7 +103,6 @@ function foodListPopulate() {
   //["Banana", 89, 100, 'g']
   foodSearch();
   document.getElementById('fdsrch').addEventListener('input', foodSearch, false);
-  //document.getElementById('fdsrch').addEventListener('mouseup', foodSearch, false);
 }
 
 function foodSearch() {
@@ -155,7 +154,9 @@ function foodSearch() {
   }
 
   //add the list to the pane.
-  document.getElementById('foodsToday').innerHTML = listOfFoods;
+  document.getElementById('searchFoods').innerHTML = listOfFoods;
+  //make the list scrollable
+  upSetClass(document.getElementById('searchFoods'));
 }
 
 function findFoodIndex(num) {
@@ -308,17 +309,27 @@ function savedFoodsSave() {
 }
 
 function searchFocus() {
-  //put the foodPane to the top of the todayPane and fill the height.
-  document.getElementById('foodPane').style.position = 'absolute';
-  document.getElementById('foodPane').style.height = '100%';
+  //put the searchPane into the todayPane
+  document.getElementById('todayPane').insertBefore(
+    document.getElementById('searchPane')
+    , document.getElementById('todayPaneInner')
+  );
+  document.getElementById('fdsrch').focus();
+  //hide the food list panel
+  document.getElementById('todayPaneInner').hidden = 'true';
   mouseClear();
 }
 
 function searchBlur() {
   if (document.getElementById('fdsrch').value.length === 0) {
-    //put the foodpane back where it was.
-    document.getElementById('foodPane').style.position = '';
-    document.getElementById('foodPane').style.height = '';
+  //put the searchPane back.
+    document.getElementById('todayPaneInner').insertBefore(
+      document.getElementById('searchPane')
+      , document.getElementById('todayPaneFoods')
+    );
+    document.getElementById('searchPane').style.top = '';
+    //show the food list panel
+    document.getElementById('todayPaneInner').hidden = '';
     mouseClear();
   }
 }
@@ -444,7 +455,7 @@ function todayAdd(a,b) {
 function todayRemove(a) {
   //delete the thing!
   delete todayList[a];
-  //delete the food from the foodPane
+  //delete the food from the food list
   document.getElementById('tl' + a).parentNode.removeChild(
     document.getElementById('tl' + a)
   );
@@ -552,8 +563,10 @@ function todayListClick(targ) {
 }
 
 function saveCals() {
-  storageSave('MaintCals', parseInt(document.getElementById('maintCals').value));
-  storageSave('TargCals', parseInt(document.getElementById('targCals').value));
+  maintCalories = parseInt(document.getElementById('maintCals').value);
+  targetCalories = parseInt(document.getElementById('targCals').value);
+  storageSave('MaintCals', maintCalories);
+  storageSave('TargCals', targetCalories);
   todayRecalculate();
 }
 function dialogueMouseUp(targ) {
